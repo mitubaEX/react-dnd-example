@@ -20,34 +20,39 @@ function collect(monitor) {
   }
 }
 
-function getItemStyles(currentOffset) {
-  if (!currentOffset) {
+class CustomDragLayer extends React.Component {
+  getItemStyles(currentOffset) {
+    // do not move
+    if (!currentOffset) {
+      return {
+        display: 'none'
+      }
+    }
+
+    // move position
+    const x = currentOffset.x
+    const y = currentOffset.y
+    const transform = `translate(${x}px, ${y}px) scale(1.05)`
+
     return {
-      display: 'none'
+      WebkitTransform: transform,
+      transform: transform,
     }
   }
 
-  const x = currentOffset.x
-  const y = currentOffset.y
-  const transform = `translate(${x}px, ${y}px) scale(1.05)`
-
-  return {
-    WebkitTransform: transform,
-    transform: transform,
-  }
-}
-
-class CustomDragLayer extends React.Component {
   render() {
     const { item, itemType, isDragging, currentOffset } = this.props
+
+    // do not move
     if (!isDragging) {
       return null
     }
 
+    // render
     if (itemType === 'item') {
       return (
         <div style={layerStyles}>
-          <div style={getItemStyles(currentOffset)}>
+          <div style={this.getItemStyles(currentOffset)}>
             {item.name}
           </div>
         </div>

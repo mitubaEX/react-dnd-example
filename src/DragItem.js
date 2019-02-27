@@ -17,9 +17,9 @@ const dragSource = DragSource("item", {
 })
 
 const dropTarget = DropTarget("item", {
-  // drop 時のコールバック
+  // drop callback
   drop(dropProps, monitor, dropComponent) {
-    const dragProps = monitor.getItem();　// DragSource の props が取り出せる
+    const dragProps = monitor.getItem();　
     if (dropProps.id !== dragProps.id) {
       dragProps.onDrop(dragProps.id, dropProps.id);
     }

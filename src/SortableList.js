@@ -18,7 +18,6 @@ class SortableList extends Component {
   }
 
   onDrop = (toId, fromId) => {
-    // ここで入れ替える処理をする
     const items = this.state.items.slice();
     const toIndex = items.findIndex(i => i.id === toId);
     const fromIndex = items.findIndex(i => i.id === fromId);
