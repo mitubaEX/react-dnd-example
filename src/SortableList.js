@@ -16,6 +16,19 @@ class SortableList extends Component {
       ],
     }
   }
+
+  onDrop = (toId, fromId) => {
+    // ここで入れ替える処理をする
+    const items = this.state.items.slice();
+    const toIndex = items.findIndex(i => i.id === toId);
+    const fromIndex = items.findIndex(i => i.id === fromId);
+    const toItem = items[toIndex];
+    const fromItem = items[fromIndex];
+    items[toIndex] = fromItem;
+    items[fromIndex] = toItem;
+    this.setState({items})
+  }
+
   render () {
     return (
       <div>
@@ -23,30 +36,18 @@ class SortableList extends Component {
         {
           this.state.items.map(item => {
             return (
-                <DragItem
-                  key={item.id}
-                  id={item.id}
-                  onDrop={
-                    (toId, fromId) => {
-                      // ここで入れ替える処理をする
-                      const items = this.state.items.slice();
-                      const toIndex = items.findIndex(i => i.id === toId);
-                      const fromIndex = items.findIndex(i => i.id === fromId);
-                      const toItem = items[toIndex];
-                      const fromItem = items[fromIndex];
-                      items[toIndex] = fromItem;
-                      items[fromIndex] = toItem;
-                      this.setState({items})
-                    }
-                  }
-                  name={item.name}
-                />
+              <DragItem
+                key={item.id}
+                id={item.id}
+                onDrop={this.onDrop.bind(this)}
+                name={item.name}
+              />
             )
-          })
-        }
-      </div>
-    )
+        })
   }
+</div>
+    )
+}
 }
 
 function isAndroid() {
