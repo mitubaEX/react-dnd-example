@@ -21,3 +21,17 @@ npm start
 ## hover code
 
 Please move hover branch.
+
+## Demo
+
+### drag
+
+![drag](./demo/drag.gif)
+
+### no_layer
+
+![no_layer](./demo/non_layer.gif)
+
+### hover
+
+![hover](./demo/hover.gif)
